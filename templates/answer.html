@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <script src="https://unpkg.com/feather-icons"></script>
+{#    <script src={{ url_for('static', filename='script/script.js') }}></script>#}
+    <title>{{ answer[0] }}</title>
+</head>
+<body>
+
+{#    <div>{{ answer_weather }}</div>#}
+{#    <img src="{{ url_for('static', filename=answer[7]) }}" alt="">#}
+{#    <div class="detailed_status"></div>#}
+{#    <div class="temperature"></div>#}
+{#    <div class="speed_wind"></div>#}
+{#    <div class="direction_wind">{{ answer[3] }}</div>#}
+{#    <div class="humidity"></div>#}
+{#    <div class="pressure">{{ answer[6] }}</div>#}
+    <style>
+        body {
+            background-image: url({{ url_for('static', filename=answer[7]) }});
+            background-size: cover;
+            backdrop-filter: blur(7px)
+        }
+
+        {#.weather-side {#}
+        {#    background-image: url({{ url_for('static', filename=answer[7]) }});#}
+        {#}#}
+    </style>
+    <div class="container">
+    <div class="weather-side">
+        <div class="weather-gradient"></div>
+        <div class="date-container">
+            <h2 class="date-dayname">{{ answer[9] }}</h2><span class="date-day">{{ answer[8] }}</span><i class="location-icon" data-feather="map-pin"></i><span class="location">{{ answer[0] }}</span>
+        </div>
+        <div class="weather-container"><i class="weather-icon" data-feather="{{ answer[10] }}"></i>
+            <h1 class="weather-temp">{{ answer[1] }}</h1>
+            <h3 class="weather-desc">{{ answer[5] }}</h3>
+        </div>
+    </div>
+    <div class="info-side">
+        <div class="today-info-container">
+            <div class="today-info">
+                <div class="pressure"> <span class="title">ДАВЛЕНИЕ</span><span class="value">{{ answer[6] }} мм рт.ст.</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="humidity"> <span class="title">ВЛАЖНОСТЬ</span><span class="value">{{ answer[4] }}%</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="wind"> <span class="title">ВЕТЕР</span><span class="value">{{ answer[2] }} м/с</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="wind-direction"> <span class="title">НАПРАВЛЕНИЕ</span><span class="value">{{ answer[3] }}</span>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="week-container">
+            <ul class="week-list">
+                <li class="active"><i class="day-icon" data-feather={{ answer[11]['data-icon'][0] }}></i><span class="day-name">{{ answer[11]['daily-name'][0] }}</span><span class="day-temp">{{ answer[11]['temp'][0] }} °C</span></li>
+                <li><i class="day-icon" data-feather={{ answer[11]['data-icon'][1] }}></i><span class="day-name">{{ answer[11]['daily-name'][1] }}</span><span class="day-temp">{{ answer[11]['temp'][1] }}°C</span></li>
+                <li><i class="day-icon" data-feather={{ answer[11]['data-icon'][2] }}></i><span class="day-name">{{ answer[11]['daily-name'][2] }}</span><span class="day-temp">{{ answer[11]['temp'][2] }}°C</span></li>
+                <li><i class="day-icon" data-feather={{ answer[11]['data-icon'][3] }}></i><span class="day-name">{{ answer[11]['daily-name'][3] }}</span><span class="day-temp">{{ answer[11]['temp'][3] }}°C</span></li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="input-container">
+            <form method="post" id="place">
+                <input type="text" name="title" id="title" value="Введите город или район" onfocus="this.value=''">
+                <div class="location-container"><button class="location-button"> <i data-feather="map-pin"></i><span>Change location</span></button></div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    feather.replace()
+</script>
+</body>
+
+</html>
